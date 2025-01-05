@@ -6,6 +6,7 @@
     "@supabase/supabase-js": "^2.47.10",
     "browser-image-compression": "^2.0.2",
     "cra-template": "1.2.0",
+    "fast-json-stable-stringify": "^2.1.0",
     "openai": "^4.77.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -13,7 +14,6 @@
     "web-vitals": "^4.2.4"
   },
   "homepage": "https://vinceiswara.github.io/imagejoke",
-
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
