@@ -1,0 +1,76 @@
+.joke-rating {
+  margin: 15px 0;
+  text-align: center;
+}
+
+.rating-stars {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.star-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #ddd;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+}
+
+.star-button:hover:not(:disabled) {
+  color: #ffd700;
+  transform: scale(1.2);
+}
+
+.star-button.filled {
+  color: #ffd700;
+  animation: starPop 0.3s ease-out;
+}
+
+.star-button:disabled {
+  cursor: default;
+}
+
+/* Hover effect for unrated stars */
+.rating-stars:hover .star-button:not(:disabled):not(.filled) {
+  color: #ffe97f;
+}
+
+.rating-stars:hover .star-button:not(:disabled):hover ~ .star-button:not(:disabled) {
+  color: #ddd;
+}
+
+@keyframes starPop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Add ripple effect when clicking */
+.star-button::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255,215,0,0.2) 0%, rgba(255,215,0,0) 100%);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s ease-out;
+}
+
+.star-button:active::after {
+  opacity: 1;
+  transform: scale(2);
+} 

@@ -1,0 +1,56 @@
+import React from 'react';
+import ImageHistory from './components/ImageHistory';
+import ImagePreview from './components/ImagePreview';
+import StatusMessage from './components/StatusMessage';
+import { useHistory } from './hooks/useHistory';
+import { useImageProcessing } from './hooks/useImageProcessing';
+import './ImageUploader.css';
+
+function ImageUploader({ userId }) {
+  const { history, saveToHistory, clearHistory } = useHistory(userId);
+  const {
+    image,
+    description,
+    joke,
+    status,
+    error,
+    cameraPermission,
+    handleImageChange
+  } = useImageProcessing(saveToHistory);
+
+  return (
+    <div className="image-uploader">
+      <h2>Image Joke Generator</h2>
+      
+      <StatusMessage 
+        status={status}
+        error={error}
+        cameraPermission={cameraPermission}
+      />
+
+      <input
+        type="file"
+        accept="image/*"
+        capture="environment"
+        className="file-input"
+        onChange={handleImageChange}
+        aria-label="Upload image"
+        multiple={false}
+      />
+
+      <ImagePreview 
+        image={image}
+        description={description}
+        joke={joke}
+      />
+
+      <ImageHistory 
+        history={history} 
+        clearHistory={clearHistory}
+        userId={userId}
+      />
+    </div>
+  );
+}
+
+export default ImageUploader;
