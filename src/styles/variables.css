@@ -1,0 +1,14 @@
+:root {
+  --primary-blue: #3B82F6;
+  --background-blue: #3B82F6;
+  --text-dark: #1A1F36;
+  --text-light: #4F566B;
+  --white: #FFFFFF;
+  --border-radius: 16px;
+  --shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Add a gradient overlay for depth */
+body {
+  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+} 

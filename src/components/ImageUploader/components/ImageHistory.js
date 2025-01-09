@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Modal from './Modal';
 import JokeRating from './JokeRating';
 import { useRatings } from '../hooks/useRatings';
+import './ImageHistory.css';
 
 function ImageHistory({ history, clearHistory, userId }) {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -11,23 +12,29 @@ function ImageHistory({ history, clearHistory, userId }) {
 
   return (
     <div className="history-container">
-      <h3>History</h3>
-      <button onClick={clearHistory}>Clear History</button>
-      <div className="history-items">
+      <div className="history-header">
+        <h3>History</h3>
+        <button onClick={clearHistory}
+          className="button-secondary"
+        >Clear History</button>
+      </div>
+
+      <div className="history-grid">
         {history.map((item, index) => (
-          <div key={index} className="history-item">
+          <div key={index} className="history-card">
             <img 
               src={item.image_url} 
               alt="Historical" 
-              style={{ width: '100px', cursor: 'pointer' }} 
+              className="history-image"
               onClick={() => setSelectedImage(item)}
             />
             <div className="history-content">
-              <p><strong>Description:</strong> {item.description}</p>
-              <p><strong>Joke:</strong> {item.joke}</p>
+              <p className="description-text">{item.description}</p>
+              <p className="joke-text">{item.joke}</p>
               <JokeRating
                 rating={ratings[item.id] || 0}
                 onRate={(rating) => rateJoke(item.id, rating)}
+                disabled={false}
               />
             </div>
           </div>
@@ -39,17 +46,18 @@ function ImageHistory({ history, clearHistory, userId }) {
         onClose={() => setSelectedImage(null)}
       >
         {selectedImage && (
-          <div className="modal-image-container">
+          <div className="modal-content">
             <img 
               src={selectedImage.image_url} 
               alt={selectedImage.description} 
             />
-            <div className="modal-image-details">
-              <p><strong>Description:</strong> {selectedImage.description}</p>
-              <p><strong>Joke:</strong> {selectedImage.joke}</p>
+            <div className="modal-details">
+              <p className="description-text">{selectedImage.description}</p>
+              <p className="joke-text">{selectedImage.joke}</p>
               <JokeRating
                 rating={ratings[selectedImage.id] || 0}
                 onRate={(rating) => rateJoke(selectedImage.id, rating)}
+                disabled={false}
               />
             </div>
           </div>

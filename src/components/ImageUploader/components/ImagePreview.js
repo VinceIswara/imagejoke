@@ -1,38 +1,31 @@
 import React from 'react';
+import './ImagePreview.css';
 
 function ImagePreview({ image, description, joke }) {
   return (
-    <div>
+    <div className="preview-container">
       {image && (
-        <div>
-          <h3>Preview:</h3>
+        <div className="preview-card">
+          <h3>Preview</h3>
           <img 
             src={image} 
             alt="Preview" 
-            style={{ width: '300px', height: 'auto' }} 
+            className="preview-image"
           />
         </div>
       )}
 
       {description && (
-        <div>
-          <h3>Description:</h3>
+        <div className="description-card">
+          <h3>Description</h3>
           <p>{description}</p>
         </div>
       )}
 
       {joke && (
-        <div style={{ 
-          marginTop: '20px', 
-          padding: '15px', 
-          backgroundColor: '#f0f0f0', 
-          borderRadius: '8px' 
-        }}>
-          <h3>🎭 Here's a joke based on your image:</h3>
-          <p style={{ 
-            fontSize: '1.1em', 
-            fontStyle: 'italic' 
-          }}>{joke}</p>
+        <div className="joke-card">
+          <h3>🎭 Generated Joke</h3>
+          <p className="joke-text">{joke}</p>
         </div>
       )}
     </div>

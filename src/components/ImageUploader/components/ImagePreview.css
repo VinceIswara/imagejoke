@@ -1,0 +1,42 @@
+.preview-container {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.preview-card,
+.description-card,
+.joke-card {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.preview-image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.joke-card {
+  background: var(--primary-blue);
+  color: var(--white);
+}
+
+.joke-text {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+h3 {
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+}
+
+.joke-card h3 {
+  color: var(--white);
+} 

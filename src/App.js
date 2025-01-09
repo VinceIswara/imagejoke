@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from './supabaseClient';
 import ImageUploader from './components/ImageUploader/ImageUploader';
 import Auth from './components/Auth/Auth';
+import './styles/variables.css';
 import './App.css';
 
 function App() {
@@ -28,26 +29,34 @@ function App() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="App">
+        <div className="container">
+          <div className="loading-spinner">Loading...</div>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="App">
-      {!session ? (
-        <Auth />
-      ) : (
-        <div>
-          <header>
-            <button 
-              onClick={() => supabase.auth.signOut()}
-              className="sign-out-button"
-            >
-              Sign Out
-            </button>
-          </header>
-          <ImageUploader userId={session.user.id} />
-        </div>
-      )}
+      <div className="container">
+        {!session ? (
+          <Auth />
+        ) : (
+          <div className="card">
+            <header className="header">
+              <button 
+                onClick={() => supabase.auth.signOut()}
+                className="button-primary"
+              >
+                Sign Out
+              </button>
+            </header>
+            <ImageUploader userId={session.user.id} />
+          </div>
+        )}
+      </div>
     </div>
   );
 }

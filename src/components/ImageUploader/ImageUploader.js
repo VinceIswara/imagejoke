@@ -20,7 +20,9 @@ function ImageUploader({ userId }) {
 
   return (
     <div className="image-uploader">
-      <h2>Image Joke Generator</h2>
+      <div className="header">
+        <h2 className="title">Image Joke Generator</h2>
+      </div>
       
       <StatusMessage 
         status={status}
@@ -28,15 +30,19 @@ function ImageUploader({ userId }) {
         cameraPermission={cameraPermission}
       />
 
-      <input
-        type="file"
-        accept="image/*"
-        capture="environment"
-        className="file-input"
-        onChange={handleImageChange}
-        aria-label="Upload image"
-        multiple={false}
-      />
+      <label className="file-input-container">
+        <div className="upload-icon">📸</div>
+        <p>Click or drag image here</p>
+        <input
+          type="file"
+          accept="image/*"
+          capture="environment"
+          className="file-input"
+          onChange={handleImageChange}
+          aria-label="Upload image"
+          multiple={false}
+        />
+      </label>
 
       <ImagePreview 
         image={image}
