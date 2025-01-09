@@ -79,3 +79,30 @@ body {
   min-height: 200px;
   color: var(--primary-blue);
 }
+
+.network-error {
+  text-align: center;
+  padding: 2rem;
+}
+
+.network-error h2 {
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  font-family: 'Caveat', cursive;
+  font-size: 2.5rem;
+}
+
+.network-error p {
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.network-error .button-primary {
+  position: static;
+  transform: none;
+}
+
+.network-error .button-primary:hover {
+  transform: translateY(-2px);
+}

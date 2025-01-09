@@ -9,24 +9,64 @@ import './App.css';
 function App() {
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [networkError, setNetworkError] = useState(null);
 
   useEffect(() => {
-    // Get initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setLoading(false);
-    });
+    const handleOnline = () => {
+      setNetworkError(null);
+    };
+    
+    const handleOffline = () => {
+      setNetworkError('Your internet connection appears to be offline.');
+    };
 
-    // Listen for auth changes
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-      setLoading(false);
-    });
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
 
-    return () => subscription.unsubscribe();
+    // Auth check with retry
+    const checkAuth = async (retries = 3) => {
+      try {
+        const { data: { session }, error } = await supabase.auth.getSession();
+        if (error) throw error;
+        setSession(session);
+        setLoading(false);
+      } catch (error) {
+        console.error('Auth check error:', error);
+        if (retries > 0) {
+          setTimeout(() => checkAuth(retries - 1), 2000);
+        } else {
+          setNetworkError('Unable to connect to the server. Please check your connection.');
+          setLoading(false);
+        }
+      }
+    };
+
+    checkAuth();
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
   }, []);
+
+  if (networkError) {
+    return (
+      <div className="App">
+        <div className="container">
+          <div className="network-error card">
+            <h2>Connection Error</h2>
+            <p>{networkError}</p>
+            <button 
+              onClick={() => window.location.reload()}
+              className="button-primary"
+            >
+              Try Again
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (loading) {
     return (
