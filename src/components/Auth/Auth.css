@@ -7,21 +7,41 @@
   max-width: 400px;
   margin: 0 auto;
   text-align: center;
+  width: 100%;
 }
 
 .auth-container .title {
   margin-bottom: 2rem;
+  font-size: 2rem;
+  color: var(--text-primary);
+  width: 100%;
+  text-align: center;
   position: static;
   transform: none;
 }
 
 .auth-container .button-primary {
-  position: static !important;
-  transform: none !important;
+  position: static;
+  transform: none;
   margin: 0 auto;
-  display: block;
+  padding: 12px 24px;
+  font-size: 1rem;
 }
 
-.auth-container .button-primary:hover {
-  transform: translateY(-2px) !important;
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+  .auth-container {
+    padding: 1rem;
+  }
+
+  .auth-container .title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0 10px;
+  }
+
+  .auth-container .button-primary {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
 } 
