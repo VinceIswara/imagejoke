@@ -11,22 +11,26 @@ body {
 
 .App {
   min-height: 100vh;
-  padding: 2rem;
-  background-color: var(--background-blue);
+  padding: 20px;
+  box-sizing: border-box;
+  background: var(--background);
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 800px;
+  width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .card {
   background: var(--white);
-  border-radius: var(--border-radius);
-  padding: 2rem;
-  box-shadow: var(--shadow);
-  margin-bottom: 1.5rem;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .header {
@@ -57,22 +61,24 @@ body {
 .button-primary {
   position: absolute;
   right: 0;
-  top: 50%;
+  top: 10px;
   transform: translateY(-50%);
   background: var(--primary-blue);
   color: var(--white);
   border: none;
-  padding: 0.75rem 1.5rem;
+  padding: 1rem 2rem;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
   transition: transform 0.2s;
   z-index: 9999;
   pointer-events: all;
+  margin-top: 10px;
+  font-size: 1rem;
 }
 
 .button-primary:hover {
-  transform: translateY(-50%);
+  transform: translateY(-2px);
   opacity: 0.9;
 }
 
@@ -109,4 +115,91 @@ body {
 
 .network-error .button-primary:hover {
   transform: translateY(-2px);
+}
+
+/* Tablet styles */
+@media screen and (max-width: 1024px) {
+  .App {
+    padding: 30px;
+  }
+
+  .container {
+    max-width: 600px;
+    padding: 20px;
+  }
+
+  .card {
+    padding: 30px;
+  }
+}
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+  .App {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 10px;
+    max-width: 100%;
+  }
+
+  .card {
+    padding: 15px;
+    border-radius: 12px;
+  }
+
+  .button-primary {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+/* iPhone-specific fixes */
+@media screen and (max-width: 390px) {
+  .container {
+    padding: 5px;
+  }
+  
+  .card {
+    padding: 12px;
+  }
+}
+
+/* Sign out button specific styles */
+.header .button-primary {
+  padding: 0.75rem 1.5rem;  /* Smaller padding for header button */
+  font-size: 0.9rem;        /* Smaller font size */
+  width: auto;              /* Don't stretch */
+  min-width: 100px;         /* Minimum width */
+  max-width: 150px;         /* Maximum width */
+}
+
+/* General button styles */
+.button-primary {
+  background: var(--primary-blue);
+  color: var(--white);
+  border: none;
+  padding: 1rem 2rem;    /* Larger padding for other buttons */
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.2s;
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+.button-primary:hover {
+  transform: translateY(-2px);
+}
+
+/* Adjust button sizes in mobile */
+@media screen and (max-width: 768px) {
+  /* ... other mobile styles ... */
+
+  .header .button-primary,
+  .button-primary {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
 }
