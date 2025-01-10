@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from './supabaseClient';
 import ImageUploader from './components/ImageUploader/ImageUploader';
+import SignOutButton from './components/SignOutButton/SignOutButton';
 import Auth from './components/Auth/Auth';
 import './styles/variables.css';
 import './App.css';
@@ -23,7 +24,6 @@ function App() {
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
 
-    // Auth check with retry
     const checkAuth = async (retries = 3) => {
       try {
         const { data: { session }, error } = await supabase.auth.getSession();
@@ -43,7 +43,15 @@ function App() {
 
     checkAuth();
 
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+      setLoading(false);
+    });
+
     return () => {
+      subscription?.unsubscribe();
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
     };
@@ -57,7 +65,7 @@ function App() {
             <h2>Connection Error</h2>
             <p>{networkError}</p>
             <button 
-              onClick={() => window.location.reload()}
+              onClick={() => window.location.href = process.env.REACT_APP_BASE_URL}
               className="button-primary"
             >
               Try Again
@@ -86,12 +94,7 @@ function App() {
         ) : (
           <div className="card">
             <header className="header">
-              <button 
-                onClick={() => supabase.auth.signOut()}
-                className="button-primary"
-              >
-                Sign Out
-              </button>
+              <SignOutButton />
             </header>
             <ImageUploader userId={session.user.id} />
           </div>
