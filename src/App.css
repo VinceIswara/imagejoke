@@ -27,7 +27,7 @@ body {
 .card {
   background: var(--white);
   border-radius: 16px;
-  padding: 40px;
+  padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
   box-sizing: border-box;
@@ -35,11 +35,9 @@ body {
 
 .header {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 2rem;
-  position: relative;
-  pointer-events: all;
+  justify-content: flex-end;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 .title {
@@ -168,11 +166,23 @@ body {
 
 /* Sign out button specific styles */
 .header .button-primary {
-  padding: 0.75rem 1.5rem;  /* Smaller padding for header button */
-  font-size: 0.9rem;        /* Smaller font size */
-  width: auto;              /* Don't stretch */
-  min-width: 100px;         /* Minimum width */
-  max-width: 150px;         /* Maximum width */
+  padding: 6px 16px;
+  font-size: 0.9rem;
+  width: auto;
+  min-width: 80px;
+  max-width: 120px;
+  transition: opacity 0.2s ease;
+  position: static;
+  transform: none !important;
+  margin-top: 10px;
+  margin-left: auto;
+  line-height: 1.2;
+}
+
+.header .button-primary:hover {
+  opacity: 0.9;
+  transform: none !important;
+  position: static;
 }
 
 /* General button styles */
@@ -180,7 +190,7 @@ body {
   background: var(--primary-blue);
   color: var(--white);
   border: none;
-  padding: 1rem 2rem;    /* Larger padding for other buttons */
+  padding: 1rem 2rem;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
